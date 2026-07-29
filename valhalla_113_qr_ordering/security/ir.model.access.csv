@@ -1,2 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_valhalla_qr_print_wizard_user,valhalla.qr.print.wizard.user,model_valhalla_qr_print_wizard,point_of_sale.group_pos_user,1,1,1,1
