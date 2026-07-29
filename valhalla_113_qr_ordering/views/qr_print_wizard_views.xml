@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_valhalla_qr_print_wizard_form" model="ir.ui.view">
+        <field name="name">valhalla.qr.print.wizard.form</field>
+        <field name="model">valhalla.qr.print.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Print Valhalla Table QR Cards">
+                <sheet>
+                    <field name="available_floor_ids" invisible="1"/>
+                    <field name="available_table_ids" invisible="1"/>
+                    <field name="setup_ready" invisible="1"/>
+                    <div class="oe_title">
+                        <h1>Valhalla 113 Table QR Cards</h1>
+                    </div>
+                    <div class="alert alert-warning" role="alert" invisible="setup_ready">
+                        The selected POS is not yet configured for QR menu + ordering with table service.
+                    </div>
+                    <group>
+                        <group string="Restaurant &amp; Tables">
+                            <field name="pos_config_id" options="{'no_create': True}"/>
+                            <field name="include_inactive"/>
+                            <field name="floor_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                            <field name="table_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                            <field name="table_count" readonly="1"/>
+                        </group>
+                        <group string="Card Presentation">
+                            <field name="layout" widget="radio"/>
+                            <field name="heading"/>
+                            <field name="instruction"/>
+                            <field name="footer_text"/>
+                            <field name="show_url"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_apply_setup"
+                            type="object"
+                            string="Apply Valhalla QR Setup"
+                            class="btn-secondary"
+                            icon="fa-cog"
+                            groups="point_of_sale.group_pos_manager"
+                            invisible="setup_ready"/>
+                    <button name="action_preview_menu"
+                            type="object"
+                            string="Preview Menu"
+                            class="btn-secondary"
+                            icon="fa-external-link"
+                            invisible="not setup_ready"/>
+                    <button name="action_print"
+                            type="object"
+                            string="Generate Printable QR Cards"
+                            class="btn-primary"
+                            icon="fa-print"
+                            invisible="not setup_ready or table_count == 0"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_valhalla_qr_print_wizard" model="ir.actions.act_window">
+        <field name="name">Valhalla Table QR Cards</field>
+        <field name="res_model">valhalla.qr.print.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_valhalla_qr_cards"
+              name="Valhalla Table QR Cards"
+              parent="point_of_sale.menu_point_config_product"
+              action="action_valhalla_qr_print_wizard"
+              sequence="35"
+              groups="point_of_sale.group_pos_manager"/>
+</odoo>

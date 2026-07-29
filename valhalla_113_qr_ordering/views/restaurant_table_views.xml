@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_restaurant_table_form_valhalla_qr" model="ir.ui.view">
+        <field name="name">restaurant.table.form.valhalla.qr</field>
+        <field name="model">restaurant.table</field>
+        <field name="inherit_id" ref="pos_restaurant.view_restaurant_table_form"/>
+        <field name="priority">90</field>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@col='2']" position="inside">
+                <separator string="Valhalla QR Table Ordering"/>
+                <field name="valhalla_qr_enabled"/>
+                <field name="valhalla_qr_label" placeholder="e.g. VIP TABLE 1" invisible="not valhalla_qr_enabled"/>
+                <field name="valhalla_qr_print_count" readonly="1" invisible="not valhalla_qr_enabled"/>
+                <field name="valhalla_qr_last_printed_at" readonly="1" invisible="not valhalla_qr_enabled"/>
+                <button name="action_open_valhalla_qr_wizard"
+                        type="object"
+                        string="Print QR Card"
+                        icon="fa-qrcode"
+                        class="btn-primary"
+                        invisible="not valhalla_qr_enabled"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

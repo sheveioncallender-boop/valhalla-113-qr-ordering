@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pos_pos_form_valhalla_qr" model="ir.ui.view">
+        <field name="name">pos.order.form.valhalla.qr</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+        <field name="priority">90</field>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group string="Valhalla QR Ordering" invisible="not valhalla_qr_order">
+                    <field name="valhalla_qr_order"/>
+                    <field name="self_ordering_table_id"/>
+                    <field name="table_id"/>
+                    <field name="source"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
