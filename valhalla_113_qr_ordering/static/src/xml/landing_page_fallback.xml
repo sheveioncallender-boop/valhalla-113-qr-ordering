@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="valhalla_113_qr_ordering.LandingPageFallback"
+       t-inherit="pos_self_order.LandingPage"
+       t-inherit-mode="extension">
+        <xpath expr="//div[@t-if='selfOrder.config._self_ordering_image_home_ids.length &gt; 0']" position="after">
+            <div t-if="selfOrder.config._self_ordering_image_home_ids.length === 0"
+                 t-on-click="start"
+                 class="valhalla-self-order-fallback vh-100 w-100 d-flex flex-column align-items-center justify-content-between text-center">
+                <div class="valhalla-self-order-fallback__content container py-5">
+                    <img src="/valhalla_113_qr_ordering/static/src/img/valhalla_self_order_brand.png"
+                         alt="Valhalla 113 Bar &amp; Grill"
+                         class="valhalla-self-order-fallback__logo"/>
+                    <p class="valhalla-self-order-fallback__eyebrow mb-2">SCAN • ORDER • ENJOY</p>
+                    <h1 class="valhalla-self-order-fallback__title mb-3">Welcome to Valhalla 113</h1>
+                    <p class="valhalla-self-order-fallback__copy mb-0">Browse the menu and send your order directly to our team.</p>
+                </div>
+                <div class="valhalla-self-order-fallback__footer container pb-4">
+                    <button type="button" t-on-click.stop="start" class="btn btn-primary btn-lg w-100 py-3">
+                        Order Now
+                    </button>
+                </div>
+            </div>
+        </xpath>
+    </t>
+</templates>
