@@ -14,6 +14,9 @@
                     <div class="alert alert-info" role="alert">
                         <strong>Native Odoo flow, Valhalla presentation.</strong>
                         Each QR code securely identifies the POS configuration and the selected restaurant table.
+                        Use the same product records as the website: publish them for eCommerce and enable
+                        Available in POS and Available in Self Order as needed. Website checkouts remain
+                        native Sales orders; table QR orders remain native POS orders.
                     </div>
                     <group>
                         <group string="Native Self-Ordering Setup">
@@ -32,9 +35,15 @@
                         </group>
                     </group>
                     <div class="d-flex gap-2 mt-3 flex-wrap">
+                        <button name="action_apply_valhalla_branding"
+                                type="object"
+                                string="Apply Branding Only"
+                                class="btn-secondary"
+                                icon="fa-paint-brush"
+                                groups="point_of_sale.group_pos_manager"/>
                         <button name="action_apply_valhalla_qr_setup"
                                 type="object"
-                                string="Apply Valhalla QR Setup"
+                                string="Enable Table Ordering (Pay After Meal)"
                                 class="btn-primary"
                                 icon="fa-qrcode"
                                 groups="point_of_sale.group_pos_manager"

@@ -160,3 +160,19 @@ img {
         min-height: 58px;
     }
 }
+
+/* Match website branding without overriding native disabled/payment states. */
+.btn-secondary {
+    --bs-btn-bg: #303438;
+    --bs-btn-border-color: #687077;
+    --bs-btn-color: #fff;
+    --bs-btn-hover-bg: #42484d;
+    --bs-btn-hover-border-color: #aeb3b8;
+    --bs-btn-hover-color: #fff;
+    background-color: #303438;
+    border-color: #687077 !important;
+    color: #fff;
+}
+.btn-secondary:hover { background-color: #42484d; color: #fff; }
+.form-check-input:checked { background-color: #d71920; border-color: #d71920; }
+.btn:focus-visible, a:focus-visible { outline: 3px solid #ff737a; outline-offset: 3px; }

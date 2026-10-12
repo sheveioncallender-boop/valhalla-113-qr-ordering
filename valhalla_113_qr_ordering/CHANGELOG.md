@@ -1,3 +1,12 @@
+# 19.0.1.1.0 — Native website companion
+
+- Add branding-only action that preserves native payment/service settings and existing landing images.
+- Give the initial table-ordering action an explicit payment/service label.
+- Remove implicit branding of every new restaurant POS and blanket table writes at installation.
+- Restrict legacy landing repairs to explicitly branded Valhalla configurations.
+- Align native secondary buttons with the silver/black/red identity.
+- Document shared products and the separate native eCommerce and POS order flows.
+
 # Changelog
 
 ## 19.0.1.0.2

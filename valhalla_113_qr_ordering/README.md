@@ -36,7 +36,7 @@ Target: Odoo 19 Community or Enterprise where the above native addons are availa
 1. Open **Point of Sale → Configuration → Point of Sales**.
 2. Open the Valhalla restaurant POS configuration.
 3. Open the **Valhalla QR Ordering** tab.
-4. Click **Apply Valhalla QR Setup**.
+4. Click **Enable Table Ordering (Pay After Meal)**.
 5. Confirm that the restaurant floor(s) and table(s) are assigned to this POS.
 6. Click **Print Table QR Cards**.
 7. Select the floors/tables and the print layout.
@@ -58,7 +58,7 @@ Guest scans table QR → native mobile menu opens → guest submits order → or
 
 ## Version
 
-`19.0.1.0.2`
+`19.0.1.1.0`
 
 
 ## Mobile blank-screen repair
@@ -69,3 +69,20 @@ Version `19.0.1.0.2` repairs configurations made with the first release. After u
 ## CSS bundle repair (19.0.1.0.2)
 
 This release uses plain CSS in `pos_self_order.assets`. Delete or replace the complete previous module folder, deploy this version, upgrade the module, restart Odoo, and then test the QR link in a private browser tab. The table QR codes do not need to be reprinted.
+
+## Website companion and native setup — 19.0.1.1.0
+
+Install the `valhalla_113_website` addon from the website repository on the **same Odoo database**. Both modules can be installed independently, in either order. Use each repository's `main` branch in Cloudpepper, rebuild, then install/upgrade its addon.
+
+The website uses native eCommerce (`sale.order`); table QR ordering uses native POS (`pos.order`). Publish the same products for the website and enable their **Available in POS** and **Available in Self Order** options for the restaurant. Product variants, prices, taxes, availability and payments remain controlled by Odoo's channel settings. These modules do not duplicate products or automatically convert website checkouts into kitchen/POS orders.
+
+The POS configuration now offers two clear actions:
+
+- **Enable Table Ordering (Pay After Meal)** explicitly selects native restaurant/mobile/table/after-meal settings for the first setup. Close the POS session first.
+- **Apply Branding Only** refreshes the official logo and fills a missing landing image, while preserving existing payment/service modes, custom landing images, floors, table identifiers and tokens.
+
+Installation no longer brands every newly created restaurant POS or writes to every existing restaurant table. Upgrade repair targets only configurations already explicitly branded as Valhalla. The matching red/silver buttons remain in the self-order asset bundle and do not affect the website cart or backend.
+
+The website's `/ordering` page explains both ordering options. At a table, customers must scan the existing table-specific QR so Odoo retains its secure table context. Do not replace these URLs with the website shop URL.
+
+Source validation passed; live installation, checkout/payment and table/kitchen acceptance must be completed on the deployed Odoo instance. See `docs/ACCEPTANCE_TEST.md`.

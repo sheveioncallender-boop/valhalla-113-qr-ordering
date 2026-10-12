@@ -1,3 +1,3 @@
 def post_init_hook(env):
-    """Enable Valhalla QR printing on restaurant tables that predate the addon."""
-    env["restaurant.table"].search([]).write({"valhalla_qr_enabled": True})
+    """Repair only explicitly branded POS configurations; preserve native setup."""
+    env["pos.config"]._valhalla_repair_existing_self_order_configs()

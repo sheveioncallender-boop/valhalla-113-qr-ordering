@@ -93,23 +93,26 @@ class PosConfig(models.Model):
             )
         return True
 
-    @api.model_create_multi
-    def create(self, vals_list):
-        for vals in vals_list:
-            if vals.get("module_pos_restaurant") and not vals.get(
-                "self_ordering_image_brand"
-            ):
-                vals.setdefault(
-                    "self_ordering_image_brand", self._valhalla_brand_binary()
-                )
-                vals.setdefault(
-                    "self_ordering_image_brand_name", "Valhalla 113 Bar & Grill"
-                )
-        configs = super().create(vals_list)
-        configs.filtered(
-            lambda config: config.self_ordering_mode not in (False, "nothing")
-        )._ensure_valhalla_mobile_landing()
-        return configs
+    def action_apply_valhalla_branding(self):
+        """Apply presentation without changing native service/payment settings."""
+        self.ensure_one()
+        if not self.env.user.has_group("point_of_sale.group_pos_manager"):
+            raise UserError(_("Only a Point of Sale manager can change this setup."))
+        self.write({
+            "self_ordering_image_brand": self._valhalla_brand_binary(),
+            "self_ordering_image_brand_name": "Valhalla 113 Bar & Grill",
+        })
+        self._ensure_valhalla_mobile_landing()
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": _("Valhalla Branding Updated"),
+                "message": _("The logo is updated. Existing service, payment, tables and QR codes are unchanged."),
+                "type": "success",
+                "sticky": False,
+            },
+        }
 
     def action_apply_valhalla_qr_setup(self):
         """Configure Odoo's native mobile self-ordering for table service."""
@@ -187,7 +190,10 @@ class PosConfig(models.Model):
     def _valhalla_repair_existing_self_order_configs(self):
         """Upgrade-time repair for configurations created by version 19.0.1.0.0."""
         configs = self.sudo().search(
-            [("self_ordering_mode", "not in", [False, "nothing"])]
+            [
+                ("self_ordering_mode", "not in", [False, "nothing"]),
+                ("self_ordering_image_brand_name", "=", "Valhalla 113 Bar & Grill"),
+            ]
         )
         configs._ensure_valhalla_mobile_landing()
         return True

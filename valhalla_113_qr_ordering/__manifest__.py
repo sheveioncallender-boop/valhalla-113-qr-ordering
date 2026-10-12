@@ -1,7 +1,7 @@
 {
     "name": "Valhalla 113 QR Table Ordering",
     "summary": "Branded QR table cards and table-linked restaurant self-ordering",
-    "version": "19.0.1.0.2",
+    "version": "19.0.1.1.0",
     "category": "Sales/Point of Sale",
     "author": "SPXCORP Limited",
     "license": "LGPL-3",

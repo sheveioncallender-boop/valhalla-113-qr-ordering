@@ -36,3 +36,15 @@ Perform this test on a staging database before live restaurant service.
 - [ ] Scan a code while the POS session is closed and confirm Odoo blocks order submission appropriately.
 - [ ] Disable a table, regenerate cards, and confirm it is excluded.
 - [ ] Attempt setup while a POS session is active and confirm the addon prevents unsafe configuration changes.
+
+
+## Website companion regression
+
+1. Install both addons fresh on Odoo 19; confirm either install order succeeds.
+2. Confirm website root opens Valhalla; native header, mobile menu, cart, login, and all added pages render.
+3. Publish one product, enable POS/self-order availability, and configure the relevant categories. Check that the same record appears in the online shop and native QR menu.
+4. Choose variants, add to the website cart, check tax/pricelist totals and complete a test checkout. Confirm one native Sales order and the correct payment state.
+5. Scan an actual table QR and submit a separate order. Confirm the correct POS session/table and preparation routing. Confirm website checkout did not create an extra POS order.
+6. Record the POS payment/service settings, table identifiers, token and custom landing image; click Apply Branding Only. Verify all recorded values remain unchanged.
+7. Upgrade both addons twice. Verify no duplicate menus/products/QR cards and preserved website logo, new page edits and POS configuration.
+8. Test mobile menu, cart icon, disabled payment buttons and QR pages on desktop/mobile. Check readability on all native forms/dialogs.
